@@ -2,7 +2,8 @@ import csv
 
 from matplotlib import pyplot as plt
 
-# fonction pour charger les fichiers
+
+# fonction pour charger les fichiers.
 def load_data(file_path, delim):
     with open(file_path, 'r', newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile, delimiter=delim)
@@ -11,13 +12,13 @@ def load_data(file_path, delim):
     return temp
 
 
-# charge les données dans les variables
+# charge les données CSV dans les variables.
 common_metadata = load_data('metadonnees_communes.csv', ';')
 data2008 = load_data('donnees_2008.csv', ',')
 data2016 = load_data('donnees_2016.csv', ',')
 data2021 = load_data('donnees_2021.csv', ';')
 
-# trie les données 2008 & 2016
+# Pour les tris suivant : on enleve toutes les villes qui ne sont pas dans la liste suivante:
 aglototal = ["Appoigny", "Augy", "Auxerre", "Bleigny-le-Carreau", "Branches",
              "Champs-sur-Yonne", "Charbuy", "Chevannes", "Chitry",
              "Coulanges-la-Vineuse", "Escamps", "Escolives Sainte-Camille",
@@ -27,27 +28,30 @@ aglototal = ["Appoigny", "Augy", "Auxerre", "Bleigny-le-Carreau", "Branches",
              "Venoy", "Villefargeau", "Villeneuve-Saint-Salves", "Vincelles",
              "Vincelottes"]
 
+# data_index == 0 représente les données de 2008 tandis que data_index == 1 celles de 2016. Tri éfficace pour éviter
+# 2 for.
 for data_index, data in enumerate([data2008, data2016]):
     data = [line for line in data if len(line) > 6 and line[6] in aglototal]
-    if data_index == 0:
+    if data_index == 0:  # 2008
         data2008 = data
-    else:
+    else:  # 2016
         data2016 = data
 
-#  trie les données 2021
+#  trie les données 2021.
+# comme les données de 2021 sont différent de 2016 & 2008, il faut se référer au métas communes.
 allowed_num = []
 for line in common_metadata:
     if line[3] in aglototal and line[2] not in allowed_num:
         allowed_num.append(line[2])
 data2021 = [line for line in data2021 if line[2] in allowed_num]
 
-# préparation du graphique
-# avec y1 = Population Totale, y2 = Population comptée à part, y3 = Population Municipale
+# préparation du graphique0 avec y1 = Population Totale, y2 = Population comptée à part, y3 = Population Municipale.
 x = [2008, 2016, 2021]
 y1 = [0, 0, 0]
 y2 = [0, 0, 0]
 y3 = [0, 0, 0]
 
+# mise en place des données dans les listes.
 for data_index, data in enumerate([data2008, data2016]):
     for line in data:
         if data_index == 0:
@@ -64,6 +68,7 @@ for line in data2021:
     y2[2] += int(line[4])
     y3[2] += int(line[3])
 
+# configuration du graphique et affichage.
 plt.figure(figsize=(7, 5))
 plt.plot(x, y1, label='Population Totale')
 plt.plot(x, y2, label='Population comptée à part')
@@ -71,6 +76,7 @@ plt.plot(x, y3, label='Population Municipale')
 plt.title("Graphique de l'évolution de lagglomeration totale.")
 plt.ylabel('Population')
 plt.xlabel('Années')
+# affichage des chiffres à chaque années sur chaque courbe.
 for i in range(len(x)):
     plt.annotate("{:.2f}".format(y1[i]), (x[i], y1[i]))
     plt.annotate("{:.2f}".format(y2[i]), (x[i], y2[i]))
