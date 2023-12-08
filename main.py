@@ -2,7 +2,7 @@ import csv
 
 from matplotlib import pyplot as plt
 
-
+# fonction pour charger les fichiers
 def load_data(file_path, delim):
     with open(file_path, 'r', newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile, delimiter=delim)
@@ -41,6 +41,8 @@ for line in common_metadata:
         allowed_num.append(line[2])
 data2021 = [line for line in data2021 if line[2] in allowed_num]
 
+# préparation du graphique
+# avec y1 = Population Totale, y2 = Population comptée à part, y3 = Population Municipale
 x = [2008, 2016, 2021]
 y1 = [0, 0, 0]
 y2 = [0, 0, 0]
@@ -66,6 +68,9 @@ plt.figure(figsize=(7, 5))
 plt.plot(x, y1, label='Population Totale')
 plt.plot(x, y2, label='Population comptée à part')
 plt.plot(x, y3, label='Pop Municipale')
+plt.title("Graphique de l'évolution de lagglomeration totale.")
+plt.ylabel('Population')
+plt.xlabel('Années')
 for i in range(len(x)):
     plt.annotate("{:.2f}".format(y1[i]), (x[i], y1[i]))
     plt.annotate("{:.2f}".format(y2[i]), (x[i], y2[i]))
