@@ -23,7 +23,7 @@ aglototal = ["Appoigny", "Augy", "Auxerre", "Bleigny-le-Carreau", "Branches",
              "Champs-sur-Yonne", "Charbuy", "Chevannes", "Chitry",
              "Coulanges-la-Vineuse", "Escamps", "Escolives Sainte-Camille",
              "Gurgy", "Gy-l'Évêque", "Irancy", "Jussy", "Lindry",
-             "Mon´eteau", "Montigny-la-Resle", "Perrigny", "Quenne",
+             "Monéteau", "Montigny-la-Resle", "Perrigny", "Quenne",
              "Saint-Bris-le-Vineux", "Saint-Georges-sur-Baulche", "Vallan",
              "Venoy", "Villefargeau", "Villeneuve-Saint-Salves", "Vincelles",
              "Vincelottes"]
