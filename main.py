@@ -53,7 +53,7 @@ for data_index, data in enumerate([data2008, data2016]):
         if data_index == 0:
             y1[0] += int(line[9])
             y2[0] += int(line[8])
-            y3[0] += int(line[8])
+            y3[0] += int(line[7])
         else:
             y1[1] += int(line[9])
             y2[1] += int(line[8])
@@ -67,7 +67,7 @@ for line in data2021:
 plt.figure(figsize=(7, 5))
 plt.plot(x, y1, label='Population Totale')
 plt.plot(x, y2, label='Population comptée à part')
-plt.plot(x, y3, label='Pop Municipale')
+plt.plot(x, y3, label='Population Municipale')
 plt.title("Graphique de l'évolution de lagglomeration totale.")
 plt.ylabel('Population')
 plt.xlabel('Années')
